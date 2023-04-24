@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
@@ -24,10 +26,10 @@ server.listen(8080, ()=>{
     console.log("Server running on http://localhost:8080/")
 });
 
-const MONGO_URL = 'mongodb+srv://fraolbereket:dA6ndbICbxKVtz1E@cluster0.xexda9v.mongodb.net/?retryWrites=true&w=majority'
+const dbHost = process.env.MONGO_URL;
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGO_URL);
+mongoose.connect(dbHost);
 mongoose.connection.on('error', (error: Error)=>console.log(error)); 
 
 app.use('/', router())
